@@ -20,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
- * @author Mauricio Gracia Gutiérrez
+ * @author Mauricio Gracia Gutiï¿½rrez
  *  
  */
 public class Util
@@ -31,8 +31,11 @@ implements LicenseString
 		return "This file is covered by the GNU GENERAL PUBLIC LICENSE, Version 2, June 1991";
 	}
 
+	/***
+	 * List of posible internetURLS
+	 */
     public static final String internetURLs[] =    {
-        "http://", "ftp://"
+        "http://", "ftp://", "https://"
     } ;
     /** The variable that contains the error, if any */
     private static UtilErrors error = UtilErrors.NO_ERROR;
@@ -40,16 +43,16 @@ implements LicenseString
     /**
      * Returns the N index of a String
      * 
-     * @param str			the String were the search will be perfomed 
+     * @param str			the String were the search will be performed 
      * 		Example: "http://yoursitehere.com/user/files"
      * @param strToSearch	the String to search for
      * 		Example: "/"
      * 
-     * @param whichOcurrence the ocurrence number you wish to find
+     * @param whichOcurrence the occurrence number you wish to find
      * 		Example: 3
      * 
      * @return Returns the N index of a String
-     *      Example: 23 ..since position 23 is the 3rd occurence of "strToSearch" inside "str" the  
+     *      Example: 23 ..since position 23 is the 3rd occurrence of "strToSearch" inside "str" the  
      */
     public static int nIndexOf(String str, String strToSearch, int whichOcurrence) {
     	int index ;
@@ -79,6 +82,12 @@ implements LicenseString
     	
     	return index ;
     }
+    /***
+     * Returns the index of the last part of the internet prefix of a posible Strign with URL
+     * 
+     * @param str the string that can start with http or ftp or even a local path
+     * @return the mentioned index (-1 when is not an internet URL string)
+     */
     public static int indexInternetURL(String str) {
         int res ;
         int which ;
@@ -109,17 +118,20 @@ implements LicenseString
      * 
      *
      * 
-     *For internet files
-     *  FROM:
-     *   "http://www.mysongbook.com/files/c/clapt/Clapton%2C%20Eric%20-%20Tears%20In%20Heaven%20%282%29.gp4"
-     *  TO:
-     *   "http://www.mysongbook.com/.../Clapton, Eric - Tears In Heaven (2).gp4"
-     *   
-     *For local files...
-     *  FROM:
-     *    "c:\myfiles\guitar\clasical\artistname\etc\example.gp4"
-     *  TO:
-     *    "c:\myfiles\...\example.gp4"
+    For internet files
+    FROM:
+         http://downloadguitarprotabs.com/sites/downloadguitarprotabs.com/files/tabs/eric-clapton-tears-in-heaven-5.gp4
+    TO:     
+         http://downloadguitarprotabs.com/.../eric-clapton-tears-in-heaven-5.gp4
+
+    For local files...
+
+    FROM:  
+	c:\myfiles\guitar\clasical\artistname\etc\example.gp4
+
+    TO:
+	c:\myfiles\...\example.gp4
+	
      *
      */
     
@@ -133,59 +145,111 @@ implements LicenseString
         res = "" ;
         urlOrig = new String(url) ;
         length = urlOrig.length() ;
-        if(maxLength < length) {
+        
+        if(length > maxLength) {
             if(maxLength < 10) {
                 maxLength = 10 ;
             }
             firstCut = indexInternetURL(urlOrig) ;
 
-            //if the beginin is not an internet URL
+            //if the beginning is not an Internet URL
             if(firstCut == -1) {
                 ocurrence = 2 ;
             }
             else {
-                //interpret %20 as " " since is the 32 ascci code
+                //interpret %20 as " " since is the 32 ASCII code
                 ocurrence = 3 ;
             }
             //determine the first cut
-            firstCut = nIndexOf(urlOrig,File.separator,ocurrence) + 1 ;
+            firstCut = indexOfAnyTwoStrings(urlOrig,File.separator,"/", ocurrence) ;
 
             //res starts with 'firstcut' byte or urlOrig
             res = urlOrig.substring(0,firstCut) + "..." ;
             
-            //res is concatenated with the rest of the string
-            res = res + urlOrig.substring(length - maxLength - firstCut - 3 ) ;
+            int nextCut ;
+            
+            nextCut = lastIndexOfAnyTwoStrings(urlOrig, File.separator,"/") ;
+            
+            res = res + urlOrig.substring(nextCut) ;
         }
         else {
             res = urlOrig ;
         }
         
         return  res ;
-        /*
-
- int    indexOf(int ch)
-          Returns the index within this string of the first occurrence of the specified character.
- int    indexOf(int ch, int fromIndex)
-          Returns the index within this string of the first occurrence of the specified character, starting the search at the specified index.
- int    indexOf(String str)
-          Returns the index within this string of the first occurrence of the specified substring.
- int    indexOf(String str, int fromIndex)
-          Returns the index within this string of the first occurrence of the specified substring, starting at the specified index.
- String     intern()
-          Returns a canonical representation for the string object.
- int    lastIndexOf(int ch)
-          Returns the index within this string of the last occurrence of the specified character.
- int    lastIndexOf(int ch, int fromIndex)
-          Returns the index within this string of the last occurrence of the specified character, searching backward starting at the specified index.
- int    lastIndexOf(String str) 
-         * 
-         * 
-         */
+        
     }
-    /**
-     * Checks if F is a file, if it exists and can be read
+    
+    /***
+     * Returns the last index of any two strings first searching for s1 and then for s2
+     * @param str the string to check
+     * @param s1 the first string to search
+     * @param s2 the second string to search
+     * @return the last index of any two strings first searching for s1 and then for s2 (-1 when none where found, -99 when str is null)
      */
+    public static int lastIndexOfAnyTwoStrings(String str, String s1, String s2)
+    {
+    	int resp ;
+    	
+    	resp = -99 ;
+    	
+    	if(str != null)
+    	{
+	    	resp = str.lastIndexOf(s1) ;
+		    if(resp == -1)
+		    {
+		    	resp = str.lastIndexOf(s2) ;
+		    }
+    	}
+    	return resp; 
+    }
+    /***
+     * the first Index of any two strings checking first for s1 and then s2
+     * 
+     * @param str the string to check
+     * @param s1 the first string to search
+     * @param s2 the second string to search
+     * @return the index of the found string or -1 if none of them were found (-99 when str is null)
+     */
+    public static int indexOfAnyTwoStrings(String str, String s1, String s2)    {
+    	return indexOfAnyTwoStrings(str,s1,s2,1) ;
+    }
+    
+    /***
+     * Return the nIndex of any two strings checking first for s1 and then s2
+     * 
+     * @param str the string to check
+     * @param s1 the first string to search
+     * @param s2 the second string to search
+     * @param ocurrence which occurrence should it be returned
+     * @return the index of the found string or -1 if none of them were found (-99 when str is null)
+     */
+    public static int indexOfAnyTwoStrings(String str, String s1, String s2, int ocurrence)
+    {
+    	int resp ;
+    	
+    	resp = -99 ;
+    	
+    	if(str != null)
+    	{
+	    	resp = nIndexOf(str,s1,ocurrence) ;
+	    	
+	    	if(resp == -1)
+	    	{
+	    		resp = nIndexOf(str,s2,ocurrence) ;
+	    	}
+	    	resp = resp + 1 ;
+    	}
+    	return resp ;
+    }
 
+
+    /***
+     * Checks if F is a file, if it exists and can be read
+     * 
+     * @param f the file to check
+     * @return true if F is a file, if it exists and can be read
+     */
     public static boolean validFile(File f) {
         boolean valid;
 
@@ -216,8 +280,10 @@ implements LicenseString
         return error;
     }
 
-    /*
-     * 2 to the x
+    /***
+     * 
+     * @param x
+     * @return 2 to the x power
      */
     public static int pow2(int x) {
         int res;
