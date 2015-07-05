@@ -11,13 +11,40 @@ X = done (this tasks have been, or will be moved to the NEWFEATURES.TXT)
 ----------------------------------
 THINGS TODO
 ----------------------------------
+/ Unify the playButton and playPanel of all windows on a playToolbar
+	X When switching between songs keep the title of the song being played
+	X Allow only a single song to be played ? 
+		
+	X When STOP button is pressed and internal frame is ICONIFIED..is not stopping
+
+	X show the information of the current selected frame?
+	X SongInternalFrame
+	X MidiInternalFrame
+	X the playToolbar should display the name of the song is linked to
+	X When all windows are closed..reset labels of playToolBar to "empty" and hide them
+
+	X playToolbar should either switch to a STOP button
+		X create a STOP button (b2.gif) 
+		X use it when the PLAY button is selected 
+	X I18N of this strings at PLAY PANEL
+		X "Song" 
+		X "Measure" 
+		X "Beat"
+		X "Division" 
+		
+	- When any music cursor is moved (by clicking), the playPanel should display its location
+		- this includes the name of the last clicked TRACK
+	- when song is MIDI...either:
+		- hide the Measure,Bar,Division labels
+		- show correct info on them
+		
 / Allow user to select between at least two type of included skins (compact, default)
 	X create a menu to "Select skin..."
 	X store/load the selected skin with the properties file
 	X capture and process the menu events 
-	/ refresh the skin without relaunching program (if posible)
+	/ refresh the skin without relaunching program (performSkinChange)
 		X test this..when more windows are open
-		- while playing some songs
+		- while playing some songs (restore the status of the PlayToolbar)
 
 - detect if is the first launch and ask the user if he wants to configure the main settings
 	- select the language
@@ -55,30 +82,7 @@ THINGS TODO
 	X test what happens when all devices do NOT have receivers
 		this means that all devices are for capturing but not for playing
 				
-/ Unify the playButton and playPanel of all windows on a playToolbar
-	- When switching between songs keep the title of the song being played
-	- Allow only a single song to be played ? 
-		- when two or more songs are playing at the same time the playPanel is updating the plays status of BOTH !!
-			- should the playPanel be refreshed ?
-	- When STOP button is pressed and internal frame is ICONIFIED..is not stopping
-	- When any music cursor is moved (by clicking), the playPanel should display its location
-		- this includes the name of the last clicked TRACK
-	X show the information of the current selected frame?
-	X SongInternalFrame
-	X MidiInternalFrame
-	X the playToolbar should display the name of the song is linked to
-	X When all windows are closed..reset labels of playToolBar to "empty" and hide them
-	- when song is MIDI...either:
-		- hide the Measure,Bar,Division labels
-		- show correct info on them
-	X playToolbar should either switch to a STOP button
-		X create a STOP button (b2.gif) 
-		X use it when the PLAY button is selected 
-	X I18N of this strings at PLAY PANEL
-		X "Song" 
-		X "Measure" 
-		X "Beat"
-		X "Division" 
+
     
 - Add URLS to the recently open files list 
 

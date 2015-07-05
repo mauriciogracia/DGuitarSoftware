@@ -55,12 +55,19 @@ public class DGInternalFrameListener implements InternalFrameListener {
 
         this.dGuitar.OpenedListRemove(JIF.getTitle()) ;
         
+        if(DGuitar.prevPlayToolBarPlayable == DGuitar.playToolBar.getPlayable())
+        {
+        	DGuitar.playToolBar.setPlayable(null) ;
+        }
+        	
         //if this is the last window
         if(DGuitar.desktopPane.getComponentCount() == 0) {
             this.dGuitar.setTitle(this.dGuitar.shortTitle());
-        //after closing all the windows set the playToolBar to NOTHING_PLAYABLE
+            //after closing all the windows set the playToolBar to NOTHING_PLAYABLE
             DGuitar.playToolBar.setStatus(Playable.NOTHING_PLAYABLE) ;
         }
+        
+       
 
     }
 

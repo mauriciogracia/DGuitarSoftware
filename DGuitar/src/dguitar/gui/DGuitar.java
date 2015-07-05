@@ -332,6 +332,8 @@ implements Internationalized,OptionsDisplay
 	 * A short that contains one of the OS_constants to easily handle native things
 	 */
 	short OS ;
+
+	public static Playable prevPlayToolBarPlayable = null ;
 	
 	/**
 	 * A class variable that stores the expected/supported java vendors
@@ -969,7 +971,8 @@ implements Internationalized,OptionsDisplay
 		 
          DGuitar.playToolBar = new PlayToolBar(DGuitar.Buttons,DGuitar.desktopPane,DGuitar.DisabledButtons) ;
 
-	 //Add the toolbar to the the TOP of DGuitar main window
+	     //Add the toolbar to the the TOP of DGuitar main window
+         DGuitar.playToolBar.setPlayable(DGuitar.prevPlayToolBarPlayable);
 		 this.getContentPane().add(DGuitar.playToolBar,BorderLayout.PAGE_START) ;
 		 this.pack() ;
 	 
@@ -994,10 +997,10 @@ implements Internationalized,OptionsDisplay
      private void removeToolBars() {
          LS.print("removing ToolBars") ;
          
+         DGuitar.prevPlayToolBarPlayable = DGuitar.playToolBar.getPlayable() ;
          this.getContentPane().remove(DGuitar.playToolBar) ;
          
          DGuitar.playToolBar = null ;
-         //this.pack() ;
      }
 	
 	/**
@@ -1080,6 +1083,7 @@ implements Internationalized,OptionsDisplay
 		SongAction.perform(DGuitar.desktopPane, SAP);
         //after closing all the windows set the playToolBar to NOTHING_PLAYABLE
         playToolBar.setStatus(Playable.NOTHING_PLAYABLE) ;
+        prevPlayToolBarPlayable = null ;
 	}
 	public void close() {
 		
@@ -1528,7 +1532,7 @@ implements Internationalized,OptionsDisplay
 	}
 	
 	/**
-	 * this methods loads the Current Sking or the defualt if current skin fails
+	 * this methods loads the Current skin or the defualt if current skin fails
 	 */
 	private void loadCurrentSkin() {
 		boolean success;
@@ -1542,7 +1546,7 @@ implements Internationalized,OptionsDisplay
         
         success = this.loadSkin(currentSkin);
 
-        //if was not successfull to load the current skint
+        //if was not successfull to load the current skin
         if (!success) {
             //and the current skin is not the default
 			if (!currentSkin.equalsIgnoreCase("default")) {

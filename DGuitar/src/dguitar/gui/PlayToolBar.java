@@ -77,12 +77,23 @@ implements ActionListener
 
 	public void setPlayable(Playable p)
 	{
-		this.setStatus(p.getStatus());
 		String tit ;
 		
-		tit = p.getSongTitle() ;
+		this.playable = p  ;
 		
-		this.setSongTitle(Util.compactAndReadableURL(tit,80) );
+		if(p != null)
+		{
+			
+			this.setStatus(this.playable.getStatus());
+			
+			tit = this.playable.getSongTitle() ;
+			
+			this.setSongTitle(Util.compactAndReadableURL(tit,80) );
+		}
+	}
+	
+	public Playable getPlayable() {
+		return this.playable;
 	}
 	
 	public void setStatus(short st) {
@@ -92,6 +103,7 @@ implements ActionListener
         case Playable.NOTHING_PLAYABLE :
             this.buttons.setButtonEnabled(BTN_INDEX_PLAY,false) ;
             this.buttons.setButtonEnabled(BTN_INDEX_STOP,false) ;
+            this.playable = null ;
             break ;
         case Playable.NOT_PLAYING :
             this.buttons.setButtonEnabled(BTN_INDEX_PLAY,true) ;
@@ -194,5 +206,7 @@ implements ActionListener
 	public PlayPanelLabels getPlayPanel() {
 		return playPanel;
 	}
+
+	
 
 }
