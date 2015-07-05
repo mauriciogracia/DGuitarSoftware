@@ -1,0 +1,363 @@
+LIST OF THINGS TODO (sorted by amount of completition)
+*****************************************************
+----------------------------------
+CONVENTIONS
+----------------------------------
+X = done (this tasks have been, or will be moved to the NEWFEATURES.TXT)
+/ = in progress (under testing or not finished)
+- = planned but not implemented
+----------------------------------
+
+----------------------------------
+THINGS TODO
+----------------------------------
+- Ask for user email to register DGuitar
+	- this will allow to perform surveys
+
+- When the DGuitar Main Window is minimized, minimize the LOG window TOO
+
+- When the DGUITAR_LOG close buttons is pressed perform one of these :
+    1. the close operation of the main window (that asks for saving as necesary)
+	2. close the LOG WINDOW, set the menu option and save the contents to LOG file
+	
+- Store the Preferred midi device on the DGuitar.properties file
+
+- Palm Mute notes that have a 28.0% occurence (higher than SLIDES 18.0% see EFFECTS.txt)
+	- Understand how they are displayed and complexity of implementing it
+
+- a SAVE option when the file been open from HTTP (or other internet protocol)
+	save the byte sequence, no need to change CODECS for now
+
+- Allow user to manage favorites (a list of different path for files, ie bookmarks)
+
+- Detect the date of the DGuitar.jar and display that as the BuildDate
+	- Display the data of the common.jar file
+
+- Replace the SWINGWORKER for a GNU/GPL Implementation to have ALL software under ONE lincense
+
+
+/ In the playpanel change the song name..
+
+    For internet files
+    FROM:
+         http://www.mysongbook.com/files/c/clapt/Clapton%2C%20Eric%20-%20Tears%20In%20Heaven%20%282%29.gp4
+    TO:     
+         http://www.mysongbook.com/.../Clapton, Eric - Tears In Heaven (2).gp4
+
+    For local files...
+
+    FROM:  
+	c:\myfiles\guitar\clasical\artistname\etc\example.gp4
+
+    TO:
+	c:\myfiles\...\example.gp4
+
+    see Util.compactAndReadableURL()
+
+- Inform TRANSLATORS about strings that need to be Internationalized (LANGUAGES.TXT)
+
+/ Let the user select which midi device he would like to use (Midi Preferences)
+	/ enable the button for "Set midi device"
+		/ test it under JRE 1.5 (JRE 1.5 is still not available for MacOs !!)
+		- test it under JRE 1.4 (does not provide a method for this ?)
+	X test what happens when all devices do NOT have receivers
+		this means that all devices are for capturing but not for playing
+	
+- Fix the the -1 values when displaying fret
+	"i get some -1 values in the tab where i guess there arepauses or stopped notes"
+	"I'm fairly certain that the -1 denotes a string that should be muted.
+	
+/ Allow user to select between at least two type of included skins (compact, default)
+	X create a menu to "Select skin..."
+	X store/load the selected skin with the properties file
+	X capture and process the menu events 
+	/ refresh the skin without relaunching program (if posible)
+		- test this..when more windows are open
+		- while playing some songs
+	
+/ JFileChooser should NOT allow the rename of Files/Folders
+	/ create and improved version of the JFileChooser (at least 3 complaints)
+	check out "DGFileChooser" and "DGFileChooserUI.java"
+		- The NEW FOLDER button still appears (usefull when saving..but not when opening)
+		- When the view is changed to DETAILS the renaming is still posible !!
+		- files can not be sorted using columns
+
+/ Unify the playButton and playPanel of all windows on a playToolbar
+	- when two or more songs are playing at the same time the playPanel is updating the plays staus of BOTH !!
+		- should the playPanel be refreshed ?
+	- When STOP button is pressend and internal frame is ICONIFIED..is not stoping
+	- When any music cursor is moved (by clicking), the playPanel should display its location
+		- this includes the name of the last clicked TRACK
+	X show the information of the current selected frame?
+	X SongInternalFrame
+	X MidiInternalFrame
+	X the playToolbar should display the name of the song is linked to
+	X When all windows are closed..reset labels of playToolBar to "empty" and hide them
+	- when song is MIDI...either:
+		- hide the Measure,Bar,Division labels
+		- show correct info on them
+	X playToolbar should either switch to a STOP button
+		X create a STOP button (b2.gif) 
+		X use it when the PLAY button is selected 
+	X I18N of this strings at PLAY PANEL
+		X "Song" 
+		X "Measure" 
+		X "Beat"
+		X "Division" 
+
+/ add this Windows operations : (see DGDesktopPane)
+	X Close all windows
+	/ Cascade, (more testing)
+	- Tab Layout (arrange windows in tabs)
+	- Grid Layout (arrange windows in a matrix)
+	- Tile Horiz
+	- Tile Vert
+	- minimize all (or selected ones)
+	- restore all (or selected ones)
+
+/ Work on the visual playing of a Score
+	X move all musicCursor syncronized
+	X When the music is auto-scrolled, the bars are now refreshed correclty 
+	X how to perform the automatic horizontal scrolling 
+	- When the cursor goes back before the actual measure, the scrolling is not going back as expected
+	- When the BARS are really wide..the forward scrolling happens before the MusicCursor has moved
+
+/ SLIDES
+	X The width depends on the Beat Width
+	- a SLIDE can join a note on the beat 1 with a note on the beat 3
+	- Slides go on a SEPARATE LAYER since it can join beats on different measures
+		see	TrackPanel.java (TrackPanel method)
+	X create the index method for the Slide types
+	X depending on the IndexNumber the EON Label will be GIF or custom PAINTED
+	X The setAnchor position for SLIDE_IN_* objects is not working fine.
+	- adjust the getPoint method to set the EXACT location
+	- the width of the slide must me narrow (depends on the width of the fret)
+	- The inclination of SLIDE_SHIFT and SLIDE_LEGATO depends on the 
+	  NextFret on the same string..like this..
+		if (NextFret >= currentFret)
+			"/"
+		else
+			"\" 
+
+/ OTHER Effects On NoteS (EONs)
+    - hammer/pulls are allways draw after the current beat.
+	- grace notes to the left of origin note
+    / there are other bend types, besides the 5 types that are now shown
+    / the horizontal line that conects the vertical rhythm lines (more testing)
+    	- when beats contain silences...horizontal rhythm lines are showing 
+		(see blue.gp4)
+
+/ The MIDI events are not showing correct info (see emails from Chris arround March 06-2005)
+
+/ create and option called "enable unfinished features" so user can decide if he wants to see/test this...
+	X create the menu check box and I18N text
+	- Store the "enable unfinished features" on preferences file
+	X DISPLAY OPTIONS for all songs
+	- SLIDES
+	- Printing
+	- other unfished options
+
+-------------
+BRAINSTORMING
+-------------
+
+- Provide a method for opening a ZIP file that contains FILES of supported extensions
+	- MySongBook and many other people distribute songs in Zip format
+	- this will allow to actually open a file direclty from the internet
+	
+- store the location and settings of the different windows to be able to open them in the 
+  last location the user place them
+
+- keep USAGE STASTICS that records how the program is used
+    - if it is the first launch ask the user if he would like to keep track of how the program is used
+         - start counting days
+         - initialize and increase counter on each menu or clickable item
+         - record attempts to use right-click and keyboard shurtcuts
+         - after 10 days of use ask the user if he wants to report how the program is used to us
+         	- if not...wait for other 10 days
+         	- else...show a text file..with the recorded statistis so user know what is to be sent
+    			send the statistics....by mail ...or with small socket application.         	
+
+- detect if is the first launch and ask the user if he wants to configure the main settings
+	- use/finsh developing the wizard classes of the Common package
+
+- create a "REPORT THIS LOG" button for the LOG WINDOW:
+	- this will open a EMAIL composing message with the typical info for error
+		- version
+		- the content of the log
+		- description of how the error/bug was produced
+	
+- create an option to compare to MIDI files...
+	Example of use:
+	
+	from a single GP file two MIDIs can be created:
+		1. from a the original GuitarPro program
+		2. from the current DGuitar player
+	In this way the differences can be reduced and the playback improved
+
+- "Realistic Sound" anyone up for the challenge ?
+	Midi sound can be improved..but its still not as good as other tools : 
+		SweetGuitar or Real Sound Engine provide a more realistic sound
+
+----------------------------------
+THINGS TO IMPLEMENT
+----------------------------------
+
+/ The colors options should also be available from the DGuitar menus, 
+	 - allow user to change colors to all (open) pieces ..see SongAction methods  ;
+	 X create/test a setDisplayOptions method at SongPanel
+	 / create/test a setDisplayOptions method at SongInternalFrame
+	 - when a ColorDialog is open it should alse refresh those colors
+	 - call validate on SongPanel
+	 - store the display Preferences in the DGuitar.properties
+
+- Use IzPack to create a DGuitar installer to Improve the way the program is "installed" 
+	and executed since many users having problems with the LANG folder..
+	for example when running this command 
+
+	java -jar DGuitar-dev/DGuitar/dist/DGuitar.jar
+
+	this is happening:
+
+	1. a dialog windows that shows "/home/mgracia//lang/lang NOT FOUND"
+
+	2.after clickin OK this appears on the LOG:
+		DGuitar (under testing) 0.5.3	28/11/2005 04:20:21 AM
+		Operational System: Linux version 2.6.9-1.667 	architecture i386
+		Java:  "Sun Microsystems Inc." version 1.4.2_04
+		Supported Extensions:[.GP3, .GP4, .GTP, .MID]
+			java.lang.NullPointerException
+			at dguitar.gui.DGuitar.load(DGuitar.java:1310)
+			at dguitar.gui.DGuitar.main(DGuitar.java:587)
+
+	- find a way to avoid/fix this error (there are tools that help to install JAVA applications)
+
+
+- Instruments LIST is returned EMPTY when different MIDI DEVICES are selected
+
+- When trying to run "DGuitar.sh" with a command similiar to this "DGuitar-dev/DGuitar/DGuitar.sh" this errors is displayed:
+	Exception in thread "main" java.util.zip.ZipException: No such file or directory
+		at java.util.zip.ZipFile.open(Native Method)
+		at java.util.zip.ZipFile.<init>(ZipFile.java:112)
+		at java.util.jar.JarFile.<init>(JarFile.java:127)
+		at java.util.jar.JarFile.<init>(JarFile.java:65)
+
+	CAUSE: this happens because your trying to run the program from another folder different than DGuitar location
+
+	SOLUTION: 
+		1. go to the folder were the DGuitar.sh is located (for example DGuitar-dev/DGuitar/ or the folder were you unzip DGuitar)
+		2. run the shell like this "./DGuitar.sh" 
+
+
+- Drag and Drop DOES NOT WORK using KDE konqueror (problems are reported by at least one user)
+	- test with other Linux File Explorers (with the FileExplorer of GNOME it works)
+
+- The minimum size of this windows needs to be set for:
+	- DGuitar LOG WINDOW 
+	- Color Options
+	- test other windows
+
+- Playing a Large GP file has a poor perfomance/timing
+	---------------------------------------------------------
+	TITLE OF THE SONG			Complete adapting process time
+	---------------------------------------------------------
+	Metallica - Solos Of Metallica.gp4 	248 KB/256 seconds
+	Opeth - Deliverance.gp4  		165 KB/166 seconds
+	Hotel California.gp3			62 KB/14 seconds
+
+	OPTIONS:
+	A) estimate the time to Adapt the song and display a INFORMATION window if its too long 
+	B) use the ProgressBar with a SwingWorker, that pops-up after a FIXED time
+
+	- Under LINUX FEDORA 3 its sound cropped, more tests
+	- PLAYing a SONG for the second time is not fast (re-adapting is required at this moment)
+
+- Change the width of the MusicCursor when its a whole beat, 
+	its crossing the Measure number (no complaints, but..)
+
+- see HTTP-ERROR.txt for a Random error that has happend on my computer..not reported by anybody else
+		
+- AutoScroll of DGuitar LOG window (no complaints, but expected/usefull)
+
+---------------------
+CODEC TASKS
+---------------------
+  - check the chords version 3 in version 4 files
+	  - FILE: "Dimanche Matin Soleil.gp4" COULD NOT BE OPEN
+
+		ERROR:  GP4decoder.GP4FormatException: 
+			Chord Diagrams are in GP3 format
+			Which are not documented
+	
+	    The readChordDiagram from GP3Decoder was used but it did not work
+
+  - check the chord diagram in version 4 at the end of file
+	  
+  - check additional bytes at the end in files from version 3 or 4.
+
+  - decode the version 1 (we will be able to open any guitar pro file)
+      
+  - wideVibrato and FadeIn are undocumented (on the GuitarPro format description)
+
+-------------------
+PLAYBACK TASKS
+-------------------
+ 
+- Adjustable tempo for playback 	
+
+- Ability to mute channels
+
+- Ability to adjust volumen of each channel
+
+---------------
+
+- create a DGIterator that allows to create a list of GTP files/folders and then perform different actions
+	- plays them.
+	- exports them to MIDI
+	- export from GPx to GPy (x,y = [1,2,3,4])
+	
+	This DGIterator should ALSO work as an external tool that does not need DGuitar GUI.
+
+- when the Color options are disabled...the MiniPanel color should be changed to gray 
+	(disabling the buttons visually)
+
+- when the view is MultiTab view, provide an option that moves the scroll bars simultaneously (when not playing)
+
+- windows that are open from the PieceInternalFrame 
+	- should be added to the destkop ?? or a Dialog (as no-modal, with parent)?
+
+- GUI methods should be dependent of Abstract clases like SCORE,TRACK and so on
+	- not linked direclty to GP4* classes
+	- Design and created GUI components for the information that GTP4Decoder can read       
+	    - Track information
+	    - Other information (Tempo, Key, Octave,MixTableChange)
+
+- Add and option to RE-DETECT available languages 
+
+- BARS should know when is required to relocate the EON LABELS 
+	- to avoid unecesary call to paintEffects and improve repainting methods.
+	- when the TOOLtip is show and then hidden, JAVA calls repaint on the objects that were covered
+
+- Improve the way the Strings of MENUS are handled
+	- abstract class java.util AbstractMap:
+	allows to link one Object with Another :
+		link StringKeys of menus with Integer of the menu IDs, consider HOT-KEY binding
+
+	this should allow to use MENU_PROGRAM instead of "MENU_PROGRAM" when I18N
+	- this can be used to evalute wich menu options was clicked.
+
+CODE
+****
+
+/ Clear UNUSED, OLD and Warning statements on all sources !!
+
+/ Comment at least every method of any class !!!
+	- when a new method, field or class is created document it inmediatly 
+
+- Change all reference to PIECE...to SONG...for clarity
+
+/ all variables in English ! (variables that contain "ant" should be changed to "prev"
+
+/ make sure that the least posible calls to "validate()" and "invalidate()" is perfomed
+------------------------------------
+
