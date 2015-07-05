@@ -1,0 +1,53 @@
+To translate the program to your language follow this steps:
+
+1. go to the LANG folder
+2. copy the file "lang.properties" to "lang_XX.properties
+      "XX" is EN for ENglish, RU for RUssian, ES for espanish..and so on.
+
+3. open the copied file in your favorite text editor
+4. translate the tests on the RIGHT side of the "="
+5. open DGuitar and choose the translated language 
+   to see if everything is translated as expected.
+6. send the file to and your name (or alias) as you want it to appear 
+   on the credits to mauriciogracia@sourceforge.net
+
+--------------------------------------------------------
+This are the strings that changed or were added recently
+for each properties file in the LANG folder
+--------------------------------------------------------
+menuDGOptionsEnabledUnfinishedFeatures = Enable unfinished features
+
+menuDGWindowsCascade = Arrange in Cascade
+
+menuDGWindowsCloseAll = Close all
+
+menuMidiDevices = View/Set available Midi devices
+
+menuDGOptionsSkins = Select skin ...
+
+midiDeviceConfigured = Current Midi device has been configured
+
+isNowPreferredMidi = is now the preferred device
+
+doesNotHaveAnyReceivers = does not have any receivers
+
+MidiDevice = Midi Device
+
+already_exists = already_exists
+
+msgSaveCurrentPreferences = Do you want to Save current Preferences before Exiting ?
+
+Song = Song
+
+Measure = Measure
+
+Beat = Beat
+
+Division = Divison
+
+msgSoundTestInProgress = Sound test is in progress, you should hear a scale
+
+OS = Operational System
+
+SupportedExtensions = Supported extensions
+

@@ -1,0 +1,213 @@
+FEATURES, INTERNATIONALIZATION AND FIXES 
+****************************************
+------------
+NEW FEATURES
+------------
+X under MAC Set the ICON to the 32X32 since the 16x16 was being displayed in the Dock
+
+X Allow user to select a FIXED language and store it with the DGuitar.properties
+
+X When the MIDI test is performed display a "you should hear a scale now" message or similar
+	X String "MidiTestUnderProgress" has been created for each file on the LANG folder
+	X Use that message on a NON modal window 
+
+X Implement a List of Recent Opened files on the PROGRAM menu(Thanks to Pratima Rao)
+
+X Detect and Allow the "Apple Computer, Inc." java vendor as supported
+
+X Calculate the performance of the Export to MIDI (if perfomanced is being measured)
+
+X DGuitar icon has been included for both the main window and the log window (if visible)
+	The 32x32 will be used/or can be use for the desktop when a installation method is provided
+
+X Dguitar can now open files passed as parameters
+   java -jar dist/Dguitar.jar files/bends.gp4 "files/4 hands.gp4" "files/ritmos varios.mid"
+
+X Generate an Include JAVADOCS for Common and DGuitar project (under "docs" folder)
+
+X create confirmation dialog when EXIT is selected
+	X detect that the Settings have changed and not been saved and ask for saving
+
+X Allow the user to select different type of the LOGing (at least a user found that window annoying) 
+	X Login can be saved to a file "DGuitarLog.txt" (overwriten with each session)
+	X Test 4 types of logging (no log, log to a file, log to a window, log to both) 
+	X Allow user to choose the type of logging (from OPTION MENU)
+	X Store the type of log on preferences file
+
+X When DGuitar.jar is DOUBLE CLICKED..the LOG is created on THAT FOLDER
+	now the log is being save under user.home (for windows this is "c:\Documents and Settings\USERNAME\")
+
+X Launch DGuitar in ACTUAL MAXIMIZED mode (this.setExtendedState(Frame.MAXIMIZED_BOTH) )
+
+X drag and drop MULTIPLE supported files to DGuitar
+
+X DGuitar now opens ALMOST any GuitarPro files version 1,2,3,4
+	(if a file fails to open, send it to us)
+
+X Export GuitarPro files to MIDI.
+	X Disable the EXPORT TO MIDI option when playing
+
+X Music Cursors allow you to select :
+	- a single beat
+	- a whole bar (clicking near the Bar lines) 
+	- There is a Music Cursor for each track that is displayed using the track color
+
+X The preferences are now saved on a "DGuitar.properties" file under user.home	  
+	X add the Option, "Save Curent Settings"
+	X add the Option, "Load Curent Settings"
+
+X provide the option to display the "?" mark for unsupported effects
+
+X show a TextDescription (ToolTip) of the Effects when placing the mouse over the effect
+
+X provide a option to SHOW/HIDE the music cursors
+
+X Add the option to Close in the File menu of the midiFrame
+
+X Choose between Fast Load and normal load 
+	X Fast-load creates the minimum things, but opening a file takes longer because JFileChooser takes long to be created)
+	X Normal load creates the needed objects at launch (opening files is faster)
+
+X Double clicking on the dist/DGuitar.jar ALSO launches the program
+	this works as long as JAR files are open by the Java Virtual Machine
+
+X FileLocation is now checked for Read and Write permissions (otherwise is set to user.home)
+
+X Detect and print OPERATIONAL SYSTEM information
+
+--------------------
+INTERNATIONALIZATION
+--------------------
+
+X RUSSIAN translation thanks to Anton Roslavsky
+
+X SWITCH BETWEEN LANGUAGES INMEDIATLY without relaunching the program
+	X all the methods that use setText() of Swing components need to be organized in a method called setLangText() ;
+	X when the language is changed called that method on required objects 
+
+X ITALIAN translation thanks to Dino Michelon (and revised by Martello Giorgio)
+
+X POLISH translation thanks to Marcin Woloszczuk (Marcin Wo\u0142oszczuk)
+
+X CZECH translation thanks to Petr Sigut (Petr \u0160igut)
+
+X SWEDISH translation thanks to Rabbinn (Robin)
+
+X PORTUGUESE (Brazil) translation thanks to Hugo Doria
+
+X LANG folder now also supports "LANGUAGE_COUNTRY" files like "lang_pt_BR.properties"
+
+X Finish I18N of the ScoreInformationDialog
+
+X I18N of the MidiInternalFrame
+
+
+
+
+-----
+FIXES
+-----
+X When a MIDI file is open and "VIEW midi events" have been chosen, when any checkBox is clicked it plays/stops the MIDI
+	this BUG also happens with version 0.4.2 (not fixing bugs on previous versions !!!)
+
+x Fix CASE SENSITIVE files names (LICENSE.TXT is converted to license.txt under LINUX)
+
+x Fix DGuitar.sh file so it keeps the +X flag and correct format 
+
+X [ 1188181 ] DGuitar Log Window is Black Text on Black on OS X
+	ScrollTextPanel.java was changed 
+		jTextArea1.setBackground(new Color(168,152,144)) ;
+		
+X When there is a WHITE COLOR TRACK display that color to BLACK	
+	otherwise the MusicCursor will not be VISIBLE (background at this moment is also WHITE)
+		
+
+X REMOVE COPY-RIGHTED SONGS !?!?!?
+	X Remove all the popular/well know songs from this and next official releases 
+
+X When CLOSING DGuitar with MINIMIZED windows, produces a ClassCastException
+
+X When opening a http:// file...and not conncected to internet
+	X CATCH this error "java.net.UnknownHostException: www.HOST.com" and 
+	show a message "please make sure you are connected to internet, since HOST was not found"
+
+X create the correct icon for the 128th duration note (5 colas)
+	X include/test that ICON on the COLOR options
+
+X Playing a *.GTP file (KANSAS_DUSTINTHEWIND.GTP) is causing this error :
+	java.util.NoSuchElementException
+		at java.util.LinkedList$ListItr.next(Unknown Source)
+		at dguitar.adaptors.guitarPro.GPAdaptor.makeSongMeasure(GPAdaptor.java:199)
+		at dguitar.adaptors.guitarPro.GPAdaptor.phraseFactory(GPAdaptor.java:334)
+		at dguitar.adaptors.guitarPro.GPAdaptor.makeSong(GPAdaptor.java:418)
+		at dguitar.gui.SongInternalFrame.initSongAndPlayer(SongInternalFrame.java:562)
+		at dguitar.gui.SongInternalFrame.play(SongInternalFrame.java:902)
+		at dguitar.gui.SongInternalFrame.actionPerformed(SongInternalFrame.java:242)
+
+X Arrange a new windows lower that the current height, to allow menus to be seen
+
+X Reduce the height of the Tablature Bars/Panel to fit more tracks on less VERTICAL space
+
+X calculate performance of the ADAPTOR when the PLAY button is pressed
+
+X let the user decide if he wants a single color for all the MusicCursors or the color of the Guitar Pro track.
+
+X the HEIGHT of the BARPANEL is now correct (changed from GridLayout to GridBagLayout)
+
+X When the Midi Test window is closed while playing the music is NOW stopped
+
+X Show the max number of measures in the PlayPanel
+
+X Correct/Expected Java vendor and version is now checked at the begining of loading (warning produced)
+
+X in the ScoreInformation the version is now shown correclty (again) 
+	This was damaged when GTP decoding was introduced
+	
+X Cursors now also work on *.GTP files
+
+X Fix this Drag and Drop errors
+	X when the DRAG starts, the window flashes under Windows(more testing)
+		This is caused when the dragged begins in the foreing window, not over DGuitar window
+	
+	X dragging files under LINUX causes this problems
+		java.awt.datatransfer.UnsupportedFlavorException: application/x-java-file-list
+			at sun.awt.dnd.SunDropTargetContextPeer.getTransferData(SunDropTargetContextPeer.java:212)
+			at sun.awt.datatransfer.TransferableProxy.getTransferData(TransferableProxy.java:55)
+			at java.awt.dnd.DropTargetContext$TransferableProxy.getTransferData(DropTargetContext.java:359)
+			at dguitar.gui.listeners.ADropTargetListener.drop(ADropTargetListener.java:59)
+			at java.awt.dnd.DropTarget.drop(DropTarget.java:398)
+			at sun.awt.dnd.SunDropTargetContextPeer.processDropMessage(SunDropTargetContextPeer.java:542)
+			at sun.awt.dnd.SunDropTargetContextPeer.access$800(SunDropTargetContextPeer.java:52)
+			at sun.awt.dnd.SunDropTargetContextPeer$EventDispatcher.dispatchDropEvent(SunDropTargetContextPeer.java:805)
+			at sun.awt.dnd.SunDropTargetContextPeer$EventDispatcher.dispatchEvent(SunDropTargetContextPeer.java:743)
+			at sun.awt.dnd.SunDropTargetEvent.dispatch(SunDropTargetEvent.java:29)
+
+		WINDOWS available flavors are: 
+			1)java.awt.datatransfer.DataFlavor[mimetype=application/x-java-file-list;representationclass=java.util.List]
+
+		LINUX available flavors are: 
+			1)java.awt.datatransfer.DataFlavor[mimetype=application/x-java-serialized-object;representationclass=java.lang.String]
+			2)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.Reader]
+			3)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.lang.String]
+			4)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.CharBuffer]
+			5)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[C]
+			6)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=UTF-16]
+			7)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.ByteBuffer;charset=UTF-16]
+			8)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[B;charset=UTF-16]
+			9)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=UTF-8]
+			10)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.ByteBuffer;charset=UTF-8]
+			11)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[B;charset=UTF-8]
+			12)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=UTF-16BE]
+			13)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.ByteBuffer;charset=UTF-16BE]
+			14)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[B;charset=UTF-16BE]
+			15)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=UTF-16LE]
+			16)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.ByteBuffer;charset=UTF-16LE]
+			17)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[B;charset=UTF-16LE]
+			18)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=unicode]
+			19)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=ISO-8859-1]
+			20)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.ByteBuffer;charset=ISO-8859-1]
+			21)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[B;charset=ISO-8859-1]
+			22)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.io.InputStream;charset=US-ASCII]
+			23)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=java.nio.ByteBuffer;charset=US-ASCII]
+			24)java.awt.datatransfer.DataFlavor[mimetype=text/plain;representationclass=[B;charset=US-ASCII]
+

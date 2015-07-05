@@ -1,0 +1,51 @@
+Notes on EFFECTS
+-----------------
+Displaying of Effects will be implemented from the most frequent to the least frequent,
+based on this statistics (feel free to send your owns statistics to the Authors)
+
+Totals for 'i:\aaa-mao\guitarra\files'
+	420 files
+	0 folders
+	44196 measures
+	1910 tracks
+	409/1910 (track with lyrics/tracks) = 21.0%
+		1244570 beats
+		4845/1244570 (ChordDiagrams/beats) = 0.0%
+		14701/1244570 (Effects/beats) = 1.0%
+			14701 effects
+				2638/14701 (upStrokes/effects) = 17.0%
+				1632/14701 (tapping/effects) = 11.0%
+				1352/14701 (downStrokes/effects) = 9.0%
+				614/14701 (tremoloBars/effects) = 4.0%				
+				32/14701 (slapping/effects) = 0.0%
+				23/14701 (pickStrokes/effects) = 0.0%
+				12/14701 (poppin/effects) = 0.0%
+
+			101751 notes
+				29174/101751 (palm Multes/notes) = 28.0%			
+				18867/101751 (slides/notes) = 18.0%
+				18760/101751 (hammerOn-PullOffs/notes) = 18.0%
+				17091/101751 (letRings/notes) = 16.0%
+				6856/101751 (left Hand Vibratos/notes) = 6.0%
+				5546/101751 (bends/notes) = 5.0%
+				1881/101751 (harmonics/notes) = 1.0%
+				1753/101751 (grace notes/notes) = 1.0%
+				340/101751 (staccatos/notes) = 0.0%				
+				67/101751 (tremolo picks/notes) = 0.0%
+				1/101751 (trills/notes) = 0.0%
+		5979/1244570 (MixTableChanges/beats) = 0.0%
+
+this are other effects with their default values, 
+	letRing = false ; 
+	bend = null ; 
+	graceNote = null ; 
+	tremoloPicking = null ;
+	slide = null ; 
+	harmonic = null ; 
+	hammerOnPullOff = false ; 
+	leftHandVibrato = false ; 
+	palmMute = false ; 
+	staccato = false ; 
+	trill = null ;
+	
+many will be painted as a process (not as a preloaded GIFs)
