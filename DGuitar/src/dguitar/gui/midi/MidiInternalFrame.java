@@ -37,7 +37,7 @@ import dguitar.gui.Playable;
 
 /**
  * 
- * @author Mauricio Gracia Gutiérrez
+ * @author Mauricio Gracia Gutiï¿½rrez
  */
 public class MidiInternalFrame extends JInternalFrame 
 implements	ActionListener, InternalFrameListener,Internationalized,Playable
@@ -72,6 +72,7 @@ implements	ActionListener, InternalFrameListener,Internationalized,Playable
     
     private short status ;
 	
+    private String songName ;
 	/**
 	 * Creates new empty MidiInternalFrame for instance/casting purposes
 	 */
@@ -97,8 +98,8 @@ implements	ActionListener, InternalFrameListener,Internationalized,Playable
 		this.setVisibleScrolls(displayingEvents);
 		
 		this.status = NOT_PLAYING ;
-		
-		this.setTitle(file);
+		this.songName = file ;
+		this.setTitle(this.songName);
 		this.midi = m;
 		m.prepareToPlay();
 		m.loadMID(file);
@@ -132,7 +133,7 @@ implements	ActionListener, InternalFrameListener,Internationalized,Playable
 				V = midi.SequenceToMidiTrackEvents();
 				events.setListData(V);
 				MEP.setMidiTrackEvents(V);
-				/* this. */validate();
+				validate();
 				
 				viewEvents.setText(aux);
 				viewEvents.setEnabled(true);
@@ -155,8 +156,8 @@ implements	ActionListener, InternalFrameListener,Internationalized,Playable
 		boolean add;
 		
 		newIndices = null;
-		//DEBUG DGuitar.LS.log(actionEvent.toString()) ;
 		id = actionEvent.getID();
+		
 		if (id == ActionEvent.ACTION_PERFORMED) {
 			//TODO...what was this for ? mod = actionEvent.getModifiers();
 			indices = this.events.getSelectedIndices();
@@ -412,6 +413,11 @@ implements	ActionListener, InternalFrameListener,Internationalized,Playable
 	private JMenuBar jMenuBar1;
 	
 	private JCheckBoxMenuItem viewEvents;
+
+	@Override
+	public String getSongTitle() {
+		return this.songName ;
+	}
 
 	
 }

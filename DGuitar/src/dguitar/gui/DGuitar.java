@@ -77,7 +77,7 @@ import java.util.*;
 /**
  * this is the DGuitar class which represents the principal window
  * 
- * @author Mauricio Gracia Gutiérrez
+ * @author Mauricio Gracia Gutiï¿½rrez
  */
 public class DGuitar extends JFrame 
 implements Internationalized,OptionsDisplay
@@ -457,7 +457,7 @@ implements Internationalized,OptionsDisplay
 			authors += esp + "TRANSLATORS AND CONTRIBUTORS";
 			authors += esp
 			+ "Avery Ceo - GPFormat Translator French-English";
-			authors += esp + "Timothée Birckel - Logo creation";
+			authors += esp + "Timothï¿½e Birckel - Logo creation";
 			
 			//------------------TRANSLATORS---------
 			authors += esp + "Catherine Beauchemin - French Tranlation";
@@ -1776,7 +1776,7 @@ implements Internationalized,OptionsDisplay
 		
 		resp = false ;
 		
-		//if the parametr newSkin is not null ans is different than the current skin
+		//if the parameter newSkin is not null and is different than the current skin
 		if( (newSkin != null) && (!newSkin.equals(nameForSkinIndex(currentSkinIndex))) ) {
 			DGuitar.currentSkinIndex = getIndexForSkinName(newSkin) ;
 			
@@ -2775,7 +2775,7 @@ implements Internationalized,OptionsDisplay
 	}
 	
 	//TODO some windows are added to the desktop pane other are childs of
-	// DGuitar. all the windows should be InternalFrames ¿?
+	// DGuitar. all the windows should be InternalFrames ï¿½?
 	
 	private void refreshDisplayOptions() {
 		SongActionParameters SAP;

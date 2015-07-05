@@ -1054,6 +1054,7 @@ implements			InternalFrameListener,
 	/**
 	 * @param st the status to be set
 	 */
+    @Override
 	public void setStatus(short st) {
 		this.status = st;
 		
@@ -1078,14 +1079,15 @@ implements			InternalFrameListener,
 			this.playToolBar.setStatus(Playable.NOT_PLAYING) ;
 		}
 	}
-
+	@Override
 	public short getStatus() {
 		return this.status ;
 	}
 
-	public void pause() {
-		// TODO Auto-generated method stub
-		
+
+	@Override
+	public String getSongTitle() {
+		return this.title ;
 	}
 
 

@@ -13,7 +13,7 @@ import javax.swing.event.InternalFrameListener;
 import dguitar.gui.DGuitar;
 import dguitar.gui.PlayToolBar;
 import dguitar.gui.Playable;
-import common.Util ;
+
 
 
 public class DGInternalFrameListener implements InternalFrameListener {
@@ -25,7 +25,9 @@ public class DGInternalFrameListener implements InternalFrameListener {
 
     }
 
-    //Invoked when an internal frame is activated.
+    /***
+     * Invoked when an internal frame is activated.
+     */
     public void internalFrameActivated(InternalFrameEvent e) {
         String tit ;
         
@@ -33,11 +35,18 @@ public class DGInternalFrameListener implements InternalFrameListener {
         tit = JIF.getTitle() ;
         this.dGuitar.setTitle(DGuitar.version() + "-" + tit);
 
-        //MULTIPLE PLAY is allows in part by this lines
-        DGuitar.playToolBar.setStatus(PlayToolBar.getPlayable(JIF).getStatus()) ;
+        if(DGuitar.playToolBar.getStatus() != Playable.PLAYING)
+        {
+        	Playable p ;
+        	
+        	p = PlayToolBar.asPlayable(JIF) ;
+        	
+        	if(p != null)
+        	{
+        		DGuitar.playToolBar.setPlayable(p);
 
-        //TODO the second parameter could be calculated by the width of the window 
-        DGuitar.playToolBar.setSongTitle(Util.compactAndReadableURL(tit,80) ) ;
+        	}
+        }
     }
 
     //Invoked when an internal frame has been closed.

@@ -45,6 +45,7 @@ implements PerformanceTimerListener,Playable
 	 * Determine the staus of the playPanel if it is NOTHING_PLAYABLE, PLAYABLE or PLAYING
 	 */
 	private short status ;
+	private String title;
 	
 	/**
 	 * Creates a PlayPanel 
@@ -125,6 +126,7 @@ implements PerformanceTimerListener,Playable
     }
 
 	public void setSongTitle(String title) {
+		this.title = title ;
 		songText.setText("\"" + title + "\"") ;
 	}
 	public void onTimer(PerformanceTimerEvent pte)
@@ -153,5 +155,9 @@ implements PerformanceTimerListener,Playable
 	 */
 	public int getNumMeasures() {
 		return numMeasures;
+	}
+	@Override
+	public String getSongTitle() {
+		return this.title;
 	}
 }

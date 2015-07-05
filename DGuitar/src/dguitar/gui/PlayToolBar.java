@@ -12,13 +12,14 @@ import javax.swing.JInternalFrame;
 import javax.swing.JToolBar;
 
 import common.ImageToolBar;
+import common.Util;
 
 /**
  * @author Mauricio Gracia G
  *
  */
 public class PlayToolBar extends JToolBar 
-implements ActionListener ,Playable
+implements ActionListener 
 {
 	/**
 	 * 
@@ -27,9 +28,10 @@ implements ActionListener ,Playable
 	private ImageToolBar buttons ;
 	private PlayPanelLabels playPanel ;
 	private DGDesktopPane desktop ;
+	private Playable playable ;
 	
     /**
-     * Determine the staus of the playPanel if it is NOTHING_PLAYABLE, PLAYABLE or PLAYING
+     * Determine the status of the playPanel if it is NOTHING_PLAYABLE, PLAYABLE or PLAYING
      */
     private short status ;
     
@@ -68,33 +70,57 @@ implements ActionListener ,Playable
 		this.add(this.buttons) ;		 
         
         this.setStatus(status) ;
+        
+        this.playable = null ;
 
 	}
 
+	public void setPlayable(Playable p)
+	{
+		this.setStatus(p.getStatus());
+		String tit ;
+		
+		tit = p.getSongTitle() ;
+		
+		this.setSongTitle(Util.compactAndReadableURL(tit,80) );
+	}
+	
 	public void setStatus(short st) {
 		this.status = st ;
        
         switch(st) {
-        case NOTHING_PLAYABLE :
+        case Playable.NOTHING_PLAYABLE :
             this.buttons.setButtonEnabled(BTN_INDEX_PLAY,false) ;
             this.buttons.setButtonEnabled(BTN_INDEX_STOP,false) ;
             break ;
-        case NOT_PLAYING :
+        case Playable.NOT_PLAYING :
             this.buttons.setButtonEnabled(BTN_INDEX_PLAY,true) ;
             this.buttons.setButtonEnabled(BTN_INDEX_STOP,false) ;
             break ;
-        case PLAYING :
+        case Playable.PLAYING :
             this.buttons.setButtonEnabled(BTN_INDEX_PLAY,false) ;
             this.buttons.setButtonEnabled(BTN_INDEX_STOP,true) ;
             break ;
         
         }
 		this.playPanel.setStatus(st) ;
+		
 	}
+	
+	/***
+	 * Returns the current status of the PlayToolBar
+	 */
     public short getStatus() {
         return this.status ;
     }
-	public static Playable getPlayable(JInternalFrame jif) {
+    
+    /***
+     * Determines if a JInternalFrame is playable 
+     * 
+     * @param jif
+     * @return
+     */
+	public static Playable asPlayable(JInternalFrame jif) {
 		Playable p ;
 		
 		p = null ;
@@ -113,43 +139,46 @@ implements ActionListener ,Playable
 	 */
 	public void actionPerformed(ActionEvent event) {
 		JInternalFrame JIF ;
-		Playable p ;
-		Object source ;
-        short newStatus ;
-		//if(arg0.getSource().equals(this.buttons.getButton(0)) ;
+		boolean changeStatus ;
 		
-		//get the currently selected frame
-		JIF = desktop.getSelectedFrame() ;
-
-        newStatus = Playable.NOTHING_PLAYABLE ;
-        //if there is a Selected Frame
-		if(JIF != null) {
-			//get the playable object
-			p = getPlayable(JIF) ;
-
-            //if the frame is playable (MidiInternalFrame or SongInternalFrame..etc)
-            if(p != null) {
-                //when the status is NOTHING_PLAYABLE there is not much to do..then...
-                if(status >= Playable.NOT_PLAYING)  {
-                    source = event.getSource();
-                    //if PLAY button is pressed
-                    if(source.equals(this.buttons.getButtonAtIndex(BTN_INDEX_PLAY))) {
-                        newStatus = Playable.PLAYING ;
-                    //if STOP button is pressed
-                    } else if(source.equals(this.buttons.getButtonAtIndex(BTN_INDEX_STOP))) {
-                        newStatus = Playable.NOT_PLAYING ;
-                    }
-                }
-                //ask the playable object to set the new status (object = MidiInternalFrame or SongInternalFrame..etc)
-                p.setStatus(newStatus) ;
-
-            }
-            //else the newStatus is left as NOTHING_PLAYABLE
+        short newStatus = 0 ;
+		Playable paux ;
+		
+		changeStatus = false ;
+        if(status != Playable.NOTHING_PLAYABLE)
+        {
+        	JIF = desktop.getSelectedFrame() ;
+        	
+        	
+        	if(status == Playable.PLAYING)
+        	{
+        		newStatus = Playable.NOT_PLAYING ;
+        		        	
+        		paux = asPlayable(JIF) ;
+        		
+        		if(paux != null) {
+        			this.setSongTitle(paux.getSongTitle());
+        		}
+        		changeStatus = true ;
+        	}
+        	else
+        	{
+        		this.playable = asPlayable(JIF) ;
+       		
+        		if(playable != null) {
+        			newStatus = Playable.PLAYING ;
+        			changeStatus = true ;
+        		}
+        	}
             
-		}
-        //else the newStatus is left as NOTHING_PLAYABLE
-        
-        this.setStatus(newStatus) ;
+        	
+        	if(changeStatus)
+        	{
+        		//ask the playable object to set the new status (object = MidiInternalFrame or SongInternalFrame..etc)
+        		playable.setStatus(newStatus) ;
+        		this.setStatus(newStatus) ;
+        	}
+        }
 	}
     /**
      * set the Song title to be displayed by this toolbar
@@ -165,4 +194,5 @@ implements ActionListener ,Playable
 	public PlayPanelLabels getPlayPanel() {
 		return playPanel;
 	}
+
 }
