@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jardesc>
+<jar path="C:/aaa-mao/JAVA/Common-software/dist/Common.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/Common/.settings/Common.jardesc" exportErrors="false" exportWarnings="false" includeDirectoryEntries="false" overwrite="true" saveDescription="true" useSourceFolders="false"/>
+<manifest generateManifest="true" manifestLocation="/Common/.settings/Common.mf" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="false" exportJavaFiles="false" exportOutputFolder="true">
+<javaElement handleIdentifier="=Common/src"/>
+<file path="/Common/.classpath"/>
+<file path="/Common/.project"/>
+</selectedElements>
+</jardesc>
