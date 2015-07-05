@@ -3,6 +3,14 @@ FEATURES, INTERNATIONALIZATION AND FIXES
 ------------
 NEW FEATURES
 ------------
+X Allow user to select between at least two type of included skins (compact, default)
+	X create a menu to "Select skin..."
+	X store/load the selected skin with the properties file
+	X capture and process the menu events 
+	X refresh the skin without re-launching program (performSkinChange)
+		X test this..when more windows are open
+		X while playing some songs (restore the status of the PlayToolbar)
+
 X In the playpanel and list of recently open songs display a compact but readable song name..
 
     For internet files

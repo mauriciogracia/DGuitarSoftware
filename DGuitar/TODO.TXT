@@ -13,11 +13,11 @@ THINGS TODO
 ----------------------------------
 / Unify the playButton and playPanel of all windows on a playToolbar
 	X When switching between songs keep the title of the song being played
-	X Allow only a single song to be played ? 
+	X Allow only a single song to be played 
 		
-	X When STOP button is pressed and internal frame is ICONIFIED..is not stopping
+	X STOP song even if the song is ICONIFIED
 
-	X show the information of the current selected frame?
+	X show the information of the current selected frame
 	X SongInternalFrame
 	X MidiInternalFrame
 	X the playToolbar should display the name of the song is linked to
@@ -38,14 +38,6 @@ THINGS TODO
 		- hide the Measure,Bar,Division labels
 		- show correct info on them
 		
-/ Allow user to select between at least two type of included skins (compact, default)
-	X create a menu to "Select skin..."
-	X store/load the selected skin with the properties file
-	X capture and process the menu events 
-	/ refresh the skin without relaunching program (performSkinChange)
-		X test this..when more windows are open
-		- while playing some songs (restore the status of the PlayToolbar)
-
 - detect if is the first launch and ask the user if he wants to configure the main settings
 	- select the language
 	- select the skin
@@ -53,8 +45,16 @@ THINGS TODO
 	- Ask for user email to register DGuitar (should it be validated -- activate email link ?)
 		- this will allow to perform surveys later
 		- this email will be used when sending report of errors and usage statistics
+			
 	- allow it to choose if he wants to report statistics of usage and telemetry (checked by default)
-	
+		- menu options selected (count)
+		- performance 
+			- time to startup
+			- time to load files
+			- time to adapt files
+		- detect double clicks and right clicks (even on places components where is not used for anything)
+		- detect keys pressed	
+		
 	- allow user to choose if the wants to report errors
 		- always report errors (default)
 			- attach file that caused error (checked by default)
@@ -64,17 +64,6 @@ THINGS TODO
      	- Include the Preferred midi device 
      	- Including an option that says that is no longer the first launch 
      	
-- keep USAGE STASTICS that records how the program is used
-    - if it is the first launch ask the user if he would like to keep track of how the program is used
-         - start counting days
-         - initialize and increase counter on each menu or clickable item
-         - record attempts to use right-click and keyboard shurtcuts
-         - after 10 days of use ask the user if he wants to report how the program is used to us
-         	- if not...wait for other 10 days
-         	- else...show a text file..with the recorded statistis so user know what is to be sent
-    			send the statistics....by mail ...or with small socket application. 
-
-
 / Let the user select which midi device he would like to use (Midi Preferences)
 	/ enable the button for "Set midi device"
 		/ test it under JRE 1.5 (JRE 1.5 is still not available for MacOs !!)
