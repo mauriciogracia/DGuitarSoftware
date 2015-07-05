@@ -1,0 +1,13 @@
+COMPILING DGUITAR
+
+run this command:
+ 
+for WINDOWS
+	FullCompile.bat
+ 
+for Linux\Unix
+	chmod +x FullCompile.sh
+	./FullCompile.sh
+
+
+ 
