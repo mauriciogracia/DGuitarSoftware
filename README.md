@@ -1,3 +1,3 @@
-# DGuitarSoftware
-DGuitar is a Guitar Pro (*.GP4,*.GP3,GTP) viewer, player that works under Linux,MacOs,Solaris,BSD,Windows and 
-any other Operational System that has Java Runtime Environment 1.4 or later installed. 
+# DGuitar
+
+DGuitar is a Guitar teaching software that allows you to view listen and GuitarPro, MIDI files under Linux,MacOs,Solaris,BSD,Windows,Android,WindowsPhone and iOS 
